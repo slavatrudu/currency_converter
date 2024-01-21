@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  currency-convert:
+    build:
+        context: .
+        dockerfile: _docker/app/Dockerfile
+    image: currency-convert:latest
+    env_file:
+        - _docker/.env-mysql
+    volumes:
+        - common-app:/srv/app
+    ports:
+        - "8081:8081"
+    depends_on:
+        - db
+    networks:
+        common-network:
+
+  sheduler:
+    build:
+        context: .
+        dockerfile: _docker/sheduler/Dockerfile
+    image: sheduler:latest
+    volumes:
+        - common-app:/srv/app
+    depends_on:
+        - currency-convert
+    networks:
+        common-network:
+
+  db:
+    image: mysql:8.0.17
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 33061:3306
+    restart: always
+    env_file:
+      - _docker/.env-mysql
+    volumes:
+      - common-db:/var/lib/mysql
+      - ./database/scripts:/docker-entrypoint-initdb.d
+    networks:
+      common-network:
+
+volumes:
+  common-db:
+  common-app:
+
+networks:
+  common-network:
