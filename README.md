@@ -67,7 +67,7 @@
 <br/><br/>
 
 После перехода по ссылке "Войти" открывается окно входа в приложение в которое необходимо ввести пользователя со следующими учетными данными:
-- Email: `admin@email.ru`
+- Email: `admin@mail.ru`
 - Password: `password`
 
 ![Страница входа](https://raw.githubusercontent.com/slavatrudu/currency_converter/365510a4f6785b8636e088b73886d31019a2ec45/CurrencyConverter_Login.png)
