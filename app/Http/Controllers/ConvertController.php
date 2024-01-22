@@ -41,7 +41,6 @@ class ConvertController extends Controller
         $defaultTo = request('to_currency', $this->defaultTo);
 
         $last_date_rate = $last_update_rate = '-- --';
-//        $last_update_rate = '-- -- --';
         if ($this->currencies) {
             $last_date_rate = Carbon::createFromFormat('Y-m-d H:i:s', $this->currencies[0]->created_at)->format('d.m.Y');
             $last_update_rate = Carbon::createFromFormat('Y-m-d H:i:s', $this->currencies[0]->updated_at)->format('d.m.Y H:i:s');
